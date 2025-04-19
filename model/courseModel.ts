@@ -1,6 +1,6 @@
-import mongoose, { Document, Model, Schema, Types } from "mongoose";
+import mongoose, { Schema, Types } from "mongoose";
 
-export interface ICourse extends Document {
+export interface ICourse extends mongoose.Document {
   title: string;
   subtitle: string;
   description: string;
@@ -17,7 +17,7 @@ export interface ICourse extends Document {
   modifiedOn: Date;
 }
 
-const courseSchema: Schema<ICourse> = new Schema({
+const courseSchema = new mongoose.Schema({
   title: {
     required: true,
     type: String,
@@ -47,12 +47,12 @@ const courseSchema: Schema<ICourse> = new Schema({
     type: Boolean,
   },
   category: {
-    required: true,
     type: Schema.Types.ObjectId,
+    ref: "Category",
   },
   instructor: {
-    required: true,
     type: Schema.Types.ObjectId,
+    ref: "User",
   },
   testimonials: {
     required: true,
@@ -76,7 +76,7 @@ const courseSchema: Schema<ICourse> = new Schema({
   },
 });
 
-type CourseModel = Model<ICourse>;
+type CourseModel = mongoose.Model<ICourse>;
 
 export const Course: CourseModel =
   (mongoose.models.Course as CourseModel) ??

@@ -1,5 +1,5 @@
 import Text from "@/components/Text";
-import { ICourse } from "@/model/course-model";
+import { ICourse } from "@/model/courseModel";
 import { getCourses } from "@/queries/courses";
 
 export default async function Home() {
